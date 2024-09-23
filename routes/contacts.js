@@ -41,8 +41,7 @@ router.get('/get/:id', async (req, res) => {
 
   // Validate id is a number
   if(isNaN(id)){
-    res.status(400).json({ message: 'Invalid contact ID.'});
-    return;
+    return res.status(400).json({ message: 'Invalid contact ID.'});    
   }
 
   // By ID
@@ -66,6 +65,7 @@ router.post('/create', upload.single('image'), async (req, res) => {
   const { firstName, lastName, email, phone, title } = req.body;
 
   if(!firstName || !lastName || !email || !phone) {
+    // to-do:delete uploaded file
     return res.status(400).json({message: 'Required fields must have a value.'});
   }
 
@@ -86,12 +86,33 @@ router.post('/create', upload.single('image'), async (req, res) => {
 // Update a contact by id (with Multer)
 router.put('/update/:id', upload.single('image'), (req, res) => {
   const id = req.params.id;
+
+  // capture the remaining inputs
+
+  // validate the inputs
+
+  // get contact by id. return 404 if not found.
+
+  // if image file is uploaded: get the filename to save in db. delete the old image file. set the filename to newfilename
+  // if image file NOT uploaded: when updating record with prisma, set the filename to oldfilename
+
+  // update record in the database (ensuring filename is new or old name)
+
   res.send('Update by id ' + id);
 });
 
 // Delete a contact by id
 router.delete('/delete/:id', (req, res) => {
   const id = req.params.id;
+
+  // validate the input
+
+  // get contact by id. return 404 if not found.
+
+  // delete the image file
+
+  // delete the contact in database
+
   res.send('Delete by id ' + id);
 });
 
